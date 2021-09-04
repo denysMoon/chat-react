@@ -3,21 +3,16 @@ import { BrowserRouter} from 'react-router-dom'
 import NavBar from './components/Navbar'
 import AppRouter from './components/AppRouter';
 
-import { makeStyles, ThemeProvider, createTheme } from '@material-ui/core/styles'
-import { green } from '@material-ui/core/colors'
+import { ThemeProvider } from '@material-ui/core/styles'
+import theme from './theme'
+import CssBaseline from '@material-ui/core/CssBaseline';
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: green[500]
-    }
-  }
-})
 
 function App() {
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <div className='App'>
           <NavBar />
           <div className="content">
