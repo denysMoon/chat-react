@@ -24,12 +24,8 @@ const Login = () =>{
     const login = async () =>{
         const provider = new firebase.auth.GoogleAuthProvider()
 
-        console.log(provider)
-
         const {user} = await auth.signInWithPopup(provider)
     }
-
-    console.log(auth)
 
     return(
         <Container>

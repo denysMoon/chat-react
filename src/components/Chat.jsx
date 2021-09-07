@@ -39,20 +39,6 @@ const Chat = () =>{
     }
 
     return(
-        // <div className="content">
-        //     Chat
-        //     <div>
-        //         {
-        //            !messages ?  'no' : messages.map(el=><h2>{el.displayName}:{el.text}</h2>)
-        //         }
-        //     </div>
-        //     <div>
-        //         {/* <form onSubmite={sendMessage}> */}
-        //         <input type="text" value={value} onChange={onChange} />
-        //             <button onClick={sendMessage}>send</button>
-        //         {/* </form> */}
-        //     </div>
-        // </div>
         <Container>
             <Grid container
             justify={"center"}
@@ -74,13 +60,11 @@ const Chat = () =>{
                          </div> 
                      )
                     }
-
                 </div>
                 <Grid container
                 direction={'column'}
                 alignItems={'flex-end'}
                 style={{width: '80%'}}>
-                    {/* <input type="text" value={value} onChange={onChange} /> */}
                     <TextField fullWidth
                     rowsMax={2}
                     variant={'outlined'}
@@ -88,7 +72,9 @@ const Chat = () =>{
                     onChange={onChange}/>
 
                     <Button onClick={sendMessage}
-                    variant={'outlined'}>Send</Button>
+                    variant={'outlined'}
+                    style={{marginTop:'5px'}}>Send
+                    </Button>
                 </Grid>
             </Grid>
         </Container>
