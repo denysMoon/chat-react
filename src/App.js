@@ -12,7 +12,7 @@ function App() {
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
+        {/* <CssBaseline /> */}
         <div className='App'>
           <NavBar />
           <div className="content">
