@@ -3,11 +3,13 @@ import { useAuthState } from "react-firebase-hooks/auth"
 import { Context } from "../index"
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import firebase from "firebase/compat";
-import { Container, Grid, Button, TextField, Avatar } from '@material-ui/core'
+import { Container, Grid, Button, TextField, Typography } from '@material-ui/core'
+import moment from 'moment'
+
+import catFace from '../assets/smiles/cat-face.png'
 
 
 const Chat = () =>{
-    // const [messageItem, setMessageItem] = useState([])
     const [value, setValue] = useState('')
     const {auth, firestore} = useContext(Context)
     const [user] = useAuthState(auth)
@@ -15,24 +17,18 @@ const Chat = () =>{
         firestore.collection('message').orderBy('createdAt')
     )
 
-    // useEffect( async ()=>{
-    //     await setMessageItem(messages)
-    // }, [])
-
-    // console.log(messageItem)
-
     const onChange = e => {
         const message = e.target.value
         setValue(message)
     }
 
     const sendMessage = async () => {
-        // e.preventDefault()
         await firestore.collection('message').add({
             uid: user.uid,
             displayName: user.displayName,
             photoURL: user.photoURL,
             text: value,
+            time: moment().format('h:mm:ss a'),
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         })
         setValue('')
@@ -48,15 +44,12 @@ const Chat = () =>{
                     {
                      !messages ?  'no' : messages.map(el=>
                         <div>
-                             <Grid container>
-                                <Avatar src={el.photoURL} />
+                             <Grid container
+                             style={{padding:'2px 4px'}}>
                                 <div>
-                                    {el.displayName}
+                                    {el.time} <b>{el.displayName}</b>: {el.text}
                                 </div>
                              </Grid>
-                             <div>
-                                {el.text}
-                             </div>
                          </div> 
                      )
                     }
@@ -70,11 +63,21 @@ const Chat = () =>{
                     variant={'outlined'}
                     value={value}
                     onChange={onChange}/>
-
-                    <Button onClick={sendMessage}
-                    variant={'outlined'}
-                    style={{marginTop:'5px'}}>Send
-                    </Button>
+                    <Grid container
+                      direction="row"
+                      justifyContent="space-between"
+                      alignItems="center">
+                        <Typography style={{marginRight:'5px'}}>
+                            {/* <img src={catFace} 
+                            style={{cursor:'pointer'}}
+                            onClick={addEmoji}/> */}
+                            list of emoji
+                        </Typography>
+                        <Button onClick={sendMessage}
+                        variant={'outlined'}
+                        style={{marginTop:'5px'}}>Send
+                        </Button>
+                    </Grid>
                 </Grid>
             </Grid>
         </Container>
